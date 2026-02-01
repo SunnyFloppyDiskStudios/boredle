@@ -36,6 +36,17 @@ function findBoxes() {
 
 findBoxes();
 
+// clear boxes on site load
+document.addEventListener("load", reset, false);
+function reset() {
+    for (i of boxes1) { i.value = ""; }
+    for (i of boxes2) { i.value = ""; }
+    for (i of boxes3) { i.value = ""; }
+    for (i of boxes4) { i.value = ""; }
+    for (i of boxes5) { i.value = ""; }
+    for (i of boxes6) { i.value = ""; }
+}
+
 // activate guesses
 let selectedBox;
 
@@ -107,13 +118,26 @@ function setSelectables() {
 setSelectables();
 
 // move cursor
+let currentNum = 1;
+
+document.addEventListener("keydown", typed, false);
+function typed(e) {
+    console.log(e.keyCode);
+    if (e.keyCode !== 13 && e.keyCode !== 8) { // DO NOT enter or backspace
+        let box = document.activeElement;
+        let boxNum = box.name;
+        console.log(boxNum);
+
+        let toFocus = document.getElementsByName(Number(boxNum) + 1)[guess - 1].focus();
+    }
+}
 
 // submission
 let pass1 = false;
 let passes = 0;
 
-document.addEventListener("keydown", callBack, false);
-function callBack(e) {
+document.addEventListener("keydown", submit, false);
+function submit(e) {
     if (e.keyCode === 13) { // enter key
         if (guess === 1) {
             for (let i of boxes1) {
