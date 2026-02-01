@@ -123,12 +123,23 @@ let currentNum = 1;
 document.addEventListener("keydown", typed, false);
 function typed(e) {
     console.log(e.keyCode);
-    if (e.keyCode !== 13 && e.keyCode !== 8) { // DO NOT enter or backspace
+
+    // forward
+    if (e.keyCode !== 13 && e.keyCode !== 8 && document.activeElement.value !== "") { // (disallow) enter or backspace
         let box = document.activeElement;
         let boxNum = box.name;
         console.log(boxNum);
 
         let toFocus = document.getElementsByName(Number(boxNum) + 1)[guess - 1].focus();
+    }
+
+    // backward
+    if (e.keyCode !== 13 && e.keyCode === 8 && document.activeElement.value === "") { // disallow enter, allow backspace
+        let box = document.activeElement;
+        let boxNum = box.name;
+        console.log(boxNum);
+
+        let toFocus = document.getElementsByName(Number(boxNum) - 1)[guess - 1].focus();
     }
 }
 
