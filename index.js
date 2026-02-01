@@ -179,7 +179,5 @@ function callBack(e) {
 let goal = "BORED"; // test value for now
 
 function wordOfTheDay() {
-    // https://en.wikipedia.org/wiki/Letter_frequency
-    // ZQXJK will appear less often, rest will have same frequency for simplicity
 
 }
