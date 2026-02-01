@@ -20,6 +20,8 @@ html {
     max-width: 100%;
 
     scrollbar-width: none;
+
+    background-color: #eee;
 }
 
 html, body {
@@ -27,7 +29,7 @@ html, body {
 }
 
 .tiling {
-    background-image: url("/bored.jpeg");
+    background-image: url("/bored.svg");
     background-size: 100px;
     background-repeat: repeat;
     height: 100vh;
