@@ -73,6 +73,7 @@ html, body {
 
 input {
     margin: 3px;
+    text-transform: uppercase;
 }
 
 .h1 {
