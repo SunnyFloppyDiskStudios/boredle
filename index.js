@@ -108,13 +108,13 @@ setSelectables();
 
 // move cursor
 
-// game logic
+// submission
 let pass1 = false;
 let passes = 0;
-document.addEventListener("keydown", callBack, false);
 
+document.addEventListener("keydown", callBack, false);
 function callBack(e) {
-    if (e.keyCode === 13) {
+    if (e.keyCode === 13) { // enter key
         if (guess === 1) {
             for (let i of boxes1) {
                 if (!(i.value === "")) {
@@ -174,4 +174,12 @@ function callBack(e) {
             console.log(userWord);
         }
     }
+}
+
+let goal = "BORED"; // test value for now
+
+function wordOfTheDay() {
+    // https://en.wikipedia.org/wiki/Letter_frequency
+    // ZQXJK will appear less often, rest will have same frequency for simplicity
+
 }
