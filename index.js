@@ -1,40 +1,12 @@
 let guess = 1;
 
-let userWord = "";
-let userWordArray = [];
-
-// all guess spots on the page
-let guessArea1 = document.getElementById("guess1");
-let guessArea2 = document.getElementById("guess2");
-let guessArea3 = document.getElementById("guess3");
-let guessArea4 = document.getElementById("guess4");
-let guessArea5 = document.getElementById("guess5");
-let guessArea6 = document.getElementById("guess6");
-
-let boxes1 = [];
-let boxes2 = [];
-let boxes3 = [];
-let boxes4 = [];
-let boxes5 = [];
-let boxes6 = [];
-
-function findBoxes() {
-    boxes1 = guessArea1.children;
-    boxes2 = guessArea2.children;
-    boxes3 = guessArea3.children;
-    boxes4 = guessArea4.children;
-    boxes5 = guessArea5.children;
-    boxes6 = guessArea6.children;
-
-    console.log(boxes1);
-    console.log(boxes2);
-    console.log(boxes3);
-    console.log(boxes4);
-    console.log(boxes5);
-    console.log(boxes6);
-}
-
-findBoxes();
+// all guess boxes on the page
+let boxes1 = document.getElementById("guess1").children;
+let boxes2 = document.getElementById("guess2").children;
+let boxes3 = document.getElementById("guess3").children;
+let boxes4 = document.getElementById("guess4").children;
+let boxes5 = document.getElementById("guess5").children;
+let boxes6 = document.getElementById("guess6").children;
 
 // clear boxes on site load
 document.addEventListener("load", reset, false);
@@ -48,8 +20,6 @@ function reset() {
 }
 
 // activate guesses
-let selectedBox;
-
 function setSelectables() {
     if (guess === 1) {
         for (let i of boxes1) { i.disabled = false; }
@@ -117,35 +87,40 @@ function setSelectables() {
 
 setSelectables();
 
-// move cursor
+// move box cursor
 let currentNum = 1;
 
 document.addEventListener("keydown", typed, false);
 function typed(e) {
-    console.log(e.keyCode);
-
-    // forward
+    // move to next box on typing
     if (e.keyCode !== 13 && e.keyCode !== 8 && document.activeElement.value !== "") { // (disallow) enter or backspace
-        let box = document.activeElement;
-        let boxNum = box.name;
-        console.log(boxNum);
-
-        let toFocus = document.getElementsByName(Number(boxNum) + 1)[guess - 1].focus();
+        try {
+            document.getElementsByName(Number(document.activeElement.name) + 1)[guess - 1].focus();
+        } catch(e) {
+            document.getElementsByName("1")[guess - 1].focus();
+        }
     }
 
-    // backward
+    // move to back box on backspacing
     if (e.keyCode !== 13 && e.keyCode === 8 && document.activeElement.value === "") { // disallow enter, allow backspace
-        let box = document.activeElement;
-        let boxNum = box.name;
-        console.log(boxNum);
+        document.getElementsByName(Number(document.activeElement.name) - 1)[guess - 1].focus();
+    }
 
-        let toFocus = document.getElementsByName(Number(boxNum) - 1)[guess - 1].focus();
+    // navigate around boxes with arrow keys
+    if (e.keyCode === 37) { // <- (left arrow)
+        document.getElementsByName(Number(document.activeElement.name) - 1)[guess - 1].focus();
+    }
+
+    if (e.keyCode === 39) { // -> (right arrow)
+        document.getElementsByName(Number(document.activeElement.name) + 1)[guess - 1].focus();
     }
 }
 
-// submission
-let pass1 = false;
+// word submission
 let passes = 0;
+
+let userWord = "";
+let userWordArray = [];
 
 document.addEventListener("keydown", submit, false);
 function submit(e) {
@@ -205,13 +180,11 @@ function submit(e) {
             passes = 0;
             guess += 1;
             setSelectables();
-            console.log(guess);
-            console.log(userWord);
         }
     }
 }
 
-let goal = "BORED"; // test value for now
+let goal = ["B", "O", "R", "E", "D"]; // test value for now
 
 function wordOfTheDay() {
 
