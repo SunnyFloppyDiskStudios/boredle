@@ -93,7 +93,7 @@ let currentNum = 1;
 document.addEventListener("keydown", typed, false);
 function typed(e) {
     // move to next box on typing
-    if (e.keyCode !== 13 && e.keyCode !== 8 && document.activeElement.value !== "") { // (disallow) enter or backspace
+    if (e.keyCode !== 13 && e.keyCode !== 8 && e.keyCode !== 37 && e.keyCode !== 39 && document.activeElement.value !== "") { // disallow enter, arrows, backspace
         try {
             document.getElementsByName(Number(document.activeElement.name) + 1)[guess - 1].focus();
         } catch(e) {
@@ -102,7 +102,7 @@ function typed(e) {
     }
 
     // move to back box on backspacing
-    if (e.keyCode !== 13 && e.keyCode === 8 && document.activeElement.value === "") { // disallow enter, allow backspace
+    if (e.keyCode !== 13 && e.keyCode === 8 && e.keyCode !== 37 && e.keyCode !== 39 && document.activeElement.value === "") { // disallow enter, arrows, allow backspace
         document.getElementsByName(Number(document.activeElement.name) - 1)[guess - 1].focus();
     }
 
@@ -112,7 +112,11 @@ function typed(e) {
     }
 
     if (e.keyCode === 39) { // -> (right arrow)
-        document.getElementsByName(Number(document.activeElement.name) + 1)[guess - 1].focus();
+        try {
+            document.getElementsByName(Number(document.activeElement.name) + 1)[guess - 1].focus();
+        } catch(e) {
+            document.getElementsByName("1")[guess - 1].focus();
+        }
     }
 }
 
