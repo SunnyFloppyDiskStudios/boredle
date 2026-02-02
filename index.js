@@ -95,27 +95,31 @@ function typed(e) {
     // move to next box on typing
     if (e.keyCode !== 13 && e.keyCode !== 8 && e.keyCode !== 37 && e.keyCode !== 39 && document.activeElement.value !== "") { // disallow enter, arrows, backspace
         try {
-            document.getElementsByName(Number(document.activeElement.name) + 1)[guess - 1].focus();
+            document.activeElement.nextElementSibling.focus();
         } catch(e) {
-            document.getElementsByName("1")[guess - 1].focus();
+            if (document.activeElement.name === undefined) {
+                document.getElementsByName("1")[guess - 1].focus();
+            }
         }
     }
 
     // move to back box on backspacing
     if (e.keyCode !== 13 && e.keyCode === 8 && e.keyCode !== 37 && e.keyCode !== 39 && document.activeElement.value === "") { // disallow enter, arrows, allow backspace
-        document.getElementsByName(Number(document.activeElement.name) - 1)[guess - 1].focus();
+        document.activeElement.previousElementSibling.focus();
     }
 
     // navigate around boxes with arrow keys
     if (e.keyCode === 37) { // <- (left arrow)
-        document.getElementsByName(Number(document.activeElement.name) - 1)[guess - 1].focus();
+        document.activeElement.previousElementSibling.focus();
     }
 
     if (e.keyCode === 39) { // -> (right arrow)
         try {
-            document.getElementsByName(Number(document.activeElement.name) + 1)[guess - 1].focus();
+            document.activeElement.nextElementSibling.focus();
         } catch(e) {
-            document.getElementsByName("1")[guess - 1].focus();
+            if (document.activeElement.name === undefined) {
+                document.getElementsByName("1")[guess - 1].focus();
+            }
         }
     }
 }
