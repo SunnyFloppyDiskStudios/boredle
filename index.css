@@ -95,3 +95,27 @@ h1, h2, h3, h4, h5, h6, input {
     margin-top: 0;
 }
 
+.return {
+    z-index: 50;
+    height: 100vh;
+    width: 100vw;
+    margin-top: -0.5vh;
+    position: absolute;
+    padding: 10px;
+}
+
+a {
+    text-decoration: none;
+}
+
+.options {
+    height: 150px;
+    width: 300px;
+    align-content: center;
+    font-family: comical, sans-serif;
+    -webkit-text-stroke: 0px white;
+    position: absolute;
+
+    bottom: 20px;
+    left: 20px;
+}
