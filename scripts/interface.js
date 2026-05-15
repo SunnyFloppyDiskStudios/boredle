@@ -1,7 +1,6 @@
 // script for the ui
 
 let guess = 1;
-let foundLetters = [];
 
 // all guess boxes on the page
 let boxes = [
@@ -23,75 +22,24 @@ function reset() {
 
 // activate guesses
 function setSelectables() {
-    if (guess === 1) {
-        for (let i of boxes[0]) { i.disabled = false; }
-        for (let i of boxes[1]) { i.disabled = true; }
-        for (let i of boxes[2]) { i.disabled = true; }
-        for (let i of boxes[3]) { i.disabled = true; }
-        for (let i of boxes[4]) { i.disabled = true; }
-        for (let i of boxes[5]) { i.disabled = true; }
-    }
+    const reference = guess - 1;
 
-    if (guess === 2) {
-        for (let i of boxes[1]) { i.disabled = false; }
-        for (let i of boxes[0]) { i.disabled = true; }
-        for (let i of boxes[2]) { i.disabled = true; }
-        for (let i of boxes[3]) { i.disabled = true; }
-        for (let i of boxes[4]) { i.disabled = true; }
-        for (let i of boxes[5]) { i.disabled = true; }
-    }
-
-    if (guess === 3) {
-        for (let i of boxes[2]) { i.disabled = false; }
-        for (let i of boxes[1]) { i.disabled = true; }
-        for (let i of boxes[0]) { i.disabled = true; }
-        for (let i of boxes[3]) { i.disabled = true; }
-        for (let i of boxes[4]) { i.disabled = true; }
-        for (let i of boxes[5]) { i.disabled = true; }
-    }
-
-    if (guess === 4) {
-        for (let i of boxes[3]) { i.disabled = false; }
-        for (let i of boxes[1]) { i.disabled = true; }
-        for (let i of boxes[2]) { i.disabled = true; }
-        for (let i of boxes[0]) { i.disabled = true; }
-        for (let i of boxes[4]) { i.disabled = true; }
-        for (let i of boxes[5]) { i.disabled = true; }
-    }
-
-    if (guess === 5) {
-        for (let i of boxes[4]) { i.disabled = false; }
-        for (let i of boxes[1]) { i.disabled = true; }
-        for (let i of boxes[2]) { i.disabled = true; }
-        for (let i of boxes[3]) { i.disabled = true; }
-        for (let i of boxes[0]) { i.disabled = true; }
-        for (let i of boxes[5]) { i.disabled = true; }
-    }
-
-    if (guess === 6) {
-        for (let i of boxes[5]) { i.disabled = false; }
-        for (let i of boxes[1]) { i.disabled = true; }
-        for (let i of boxes[2]) { i.disabled = true; }
-        for (let i of boxes[3]) { i.disabled = true; }
-        for (let i of boxes[4]) { i.disabled = true; }
-        for (let i of boxes[0]) { i.disabled = true; }
-    }
-
-    if (guess >= 7) {
-        for (let i of boxes[5]) { i.disabled = true; }
-        for (let i of boxes[1]) { i.disabled = true; }
-        for (let i of boxes[2]) { i.disabled = true; }
-        for (let i of boxes[3]) { i.disabled = true; }
-        for (let i of boxes[4]) { i.disabled = true; }
-        for (let i of boxes[0]) { i.disabled = true; }
+    for (let i = 0; i < 6; i++) { // for boxes
+        if (i === reference) {
+            for (let j of boxes[i]) {
+                j.disabled = false;
+            }
+        } else {
+            for (let j of boxes[i]) {
+                j.disabled = true;
+            }
+        }
     }
 }
 
 setSelectables();
 
 // move box cursor
-let currentNum = 1;
-
 document.addEventListener("keydown", typed, false);
 function typed(e) {
     // move to next box on typing
@@ -135,52 +83,10 @@ let userWordArray = [];
 document.addEventListener("keydown", submit, false);
 function submit(e) {
     if (e.keyCode === 13) { // enter key
-        if (guess === 1) {
-            for (let i of boxes[0]) {
-                if (!(i.value === "")) {
-                    passes += 1;
-                    userWordArray.push(i.value);
-                }
-            }
-        }
-        if (guess === 2) {
-            for (let i of boxes[1]) {
-                if (!(i.value === "")) {
-                    passes += 1;
-                    userWordArray.push(i.value);
-                }
-            }
-        }
-        if (guess === 3) {
-            for (let i of boxes[2]) {
-                if (!(i.value === "")) {
-                    passes += 1;
-                    userWordArray.push(i.value);
-                }
-            }
-        }
-        if (guess === 4) {
-            for (let i of boxes[3]) {
-                if (!(i.value === "")) {
-                    passes += 1;
-                    userWordArray.push(i.value);
-                }
-            }
-        }
-        if (guess === 5) {
-            for (let i of boxes[4]) {
-                if (!(i.value === "")) {
-                    passes += 1;
-                    userWordArray.push(i.value);
-                }
-            }
-        }
-        if (guess === 6) {
-            for (let i of boxes[5]) {
-                if (!(i.value === "")) {
-                    passes += 1;
-                    userWordArray.push(i.value);
-                }
+        for (let i of boxes[guess - 1]) {
+            if (!(i.value === "")) {
+                passes += 1;
+                userWordArray.push(i.value);
             }
         }
 
@@ -191,9 +97,10 @@ function submit(e) {
             guess += 1;
             setSelectables();
         }
+
+        passes = 0;
     }
 
-    console.log(userWord);
     matchToGoal();
 }
 
@@ -220,7 +127,6 @@ function matchToGoal() {
             let foundIndex = goalCopy.indexOf(guessWord[i]);
 
             if (foundIndex !== -1) {
-
                 result[i] = "yellow";
 
                 // remove a copy
@@ -232,20 +138,15 @@ function matchToGoal() {
     // colour
     for (let i = 0; i < 5; i++) {
         if (result[i] === "green") {
-            boxes[guess - 2][i].style.background = "#f7ccff"; // pinck
-        }
-
-        else if (result[i] === "yellow") {
-            boxes[guess - 2][i].style.background = "#52c7d6"; // bleu
-        }
-
-        else {
-            boxes[guess - 2][i].style.background = "#eee"; // black
+            boxes[guess - 2][i].style.background = "#f7ccff"; // pinck (aka greeen)
+        } else if (result[i] === "yellow") {
+            boxes[guess - 2][i].style.background = "#52c7d6"; // bleu (aka yellow)
+        } else {
+            boxes[guess - 2][i].style.background = "#999"; // grey (aka gray)
         }
     }
 
     // finish!
-    console.log(result);
     if (!result.includes("grey") && !result.includes("grey")) {
         guess = 10;
         setSelectables();
@@ -256,14 +157,14 @@ function matchToGoal() {
 }
 
 function celebrate() {
-    for (var i in document.children) {
+    for (let i in document.children) {
         document["children"][i].style.background = "#52d65e"
     }
 }
 
 
 function kill() {
-    for (var i in document.children) {
+    for (let i in document.children) {
         document["children"][i].style.background = "#cb2a2a"
     }
 }
