@@ -1,6 +1,6 @@
 @font-face {
     font-family: comical;
-    src: url("Comic Sans MS.ttf")
+    src: url("assets/fonts/Comic Sans MS.ttf")
 }
 
 body {
@@ -52,7 +52,7 @@ html, body {
     position: absolute;
     top: 0;
     content: "";
-    mask-image: url("/question.svg");
+    mask-image: url("/assets/images/question.svg");
     mask-size: 100px;
     mask-repeat: repeat;
     background-color: #eee;
