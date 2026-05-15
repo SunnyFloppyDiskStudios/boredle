@@ -37,7 +37,7 @@ setSelectables();
 document.addEventListener("keydown", typed, false);
 function typed(e) {
     // move to next box on typing
-    if (e.keyCode !== 13 && e.keyCode !== 8 && e.keyCode !== 37 && e.keyCode !== 39 && document.activeElement.value !== "") { // disallow enter, arrows, backspace
+    if (e.keyCode !== (13 || 8 || 37 || 39) && document.activeElement.value !== "") { // disallow enter, arrows, backspace
         try {
             document.activeElement.nextElementSibling.focus();
         } catch(e) {
@@ -48,7 +48,7 @@ function typed(e) {
     }
 
     // move to back box on backspacing
-    if (e.keyCode !== 13 && e.keyCode === 8 && e.keyCode !== 37 && e.keyCode !== 39 && document.activeElement.value === "") { // disallow enter, arrows, allow backspace
+    if (e.keyCode === 8 && document.activeElement.value === "") { // backspace
         document.activeElement.previousElementSibling.focus();
     }
 
@@ -61,10 +61,7 @@ function typed(e) {
                 document.getElementsByName("5")[guess - 1].focus();
             }
         }
-
-    }
-
-    if (e.keyCode === 39) { // -> (right arrow)
+    } else if (e.keyCode === 39) { // -> (right arrow)
         try {
             document.activeElement.nextElementSibling.focus();
         } catch(e) {
@@ -106,71 +103,28 @@ function submit(e) {
 }
 
 function matchToGoal() {
-    let guessWord = userWord.split("");
-    let goalCopy = [...goal];
+    // for (let i = 0; i < 5; i++) {
+    //     if (result[i] === "green") {
+    //         boxes[guess - 2][i].style.background = "#f7ccff"; // pinck (aka greeen)
+    //     } else if (result[i] === "yellow") {
+    //         boxes[guess - 2][i].style.background = "#52c7d6"; // bleu (aka yellow)
+    //     } else {
+    //         boxes[guess - 2][i].style.background = "#999"; // grey (aka gray)
+    //     }
+    // }
+}
 
-    let result = ["grey", "grey", "grey", "grey", "grey"];
-
-    // exact match
-    for (let i = 0; i < 5; i++) {
-        if (guessWord[i] === goalCopy[i]) {
-            result[i] = "green";
-
-            // remove matched
-            goalCopy[i] = null;
-            guessWord[i] = null;
-        }
-    }
-
-    // wrong position but exists
-    for (let i = 0; i < 5; i++) {
-        if (guessWord[i] !== null) {
-            let foundIndex = goalCopy.indexOf(guessWord[i]);
-
-            if (foundIndex !== -1) {
-                result[i] = "yellow";
-
-                // remove a copy
-                goalCopy[foundIndex] = null;
-            }
-        }
-    }
-
-    // colour
-    for (let i = 0; i < 5; i++) {
-        if (result[i] === "green") {
-            boxes[guess - 2][i].style.background = "#f7ccff"; // pinck (aka greeen)
-        } else if (result[i] === "yellow") {
-            boxes[guess - 2][i].style.background = "#52c7d6"; // bleu (aka yellow)
+function celebrate(isCelebrating) {
+    for (let i in document.children) {
+        if (isCelebrating) {
+            document["children"][i].style.background = "#52d65e"
         } else {
-            boxes[guess - 2][i].style.background = "#999"; // grey (aka gray)
+            document["children"][i].style.background = "#cb2a2a"
         }
     }
-
-    // finish!
-    if (!result.includes("grey") && !result.includes("grey")) {
-        guess = 10;
-        setSelectables();
-        celebrate();
-    } else if (guess === 7) {
-        kill();
-    }
 }
 
-function celebrate() {
-    for (let i in document.children) {
-        document["children"][i].style.background = "#52d65e"
-    }
-}
-
-
-function kill() {
-    for (let i in document.children) {
-        document["children"][i].style.background = "#cb2a2a"
-    }
-}
-
-let goal = ["B", "O", "R", "E", "D"]; // test value for now
+let goal = "BORED"; // test value for now
 
 function wordOfTheDay() {
 
