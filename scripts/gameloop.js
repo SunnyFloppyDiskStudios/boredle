@@ -1,1 +1,0 @@
-// script for the actual wordle part

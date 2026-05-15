@@ -24,7 +24,7 @@ function reset() {
 function setSelectables() {
     const reference = guess - 1;
 
-    for (let i = 0; i < 6; i++) { // for boxes
+    for (let i = 0; i <= 5; i++) { // for boxes
         for (let j of boxes[i]) { // for inputs
             j.disabled = i !== reference;
         }
@@ -54,7 +54,14 @@ function typed(e) {
 
     // navigate around boxes with arrow keys
     if (e.keyCode === 37) { // <- (left arrow)
-        document.activeElement.previousElementSibling.focus();
+        try {
+            document.activeElement.previousElementSibling.focus();
+        } catch(e) {
+            if (document.activeElement.name === undefined) {
+                document.getElementsByName("5")[guess - 1].focus();
+            }
+        }
+
     }
 
     if (e.keyCode === 39) { // -> (right arrow)
