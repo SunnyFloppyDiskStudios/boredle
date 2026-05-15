@@ -1,87 +1,90 @@
 let guess = 1;
+let foundLetters = [];
 
 // all guess boxes on the page
-let boxes1 = document.getElementById("guess1").children;
-let boxes2 = document.getElementById("guess2").children;
-let boxes3 = document.getElementById("guess3").children;
-let boxes4 = document.getElementById("guess4").children;
-let boxes5 = document.getElementById("guess5").children;
-let boxes6 = document.getElementById("guess6").children;
+let boxes = [
+    document.getElementById("guess1").children,
+    document.getElementById("guess2").children,
+    document.getElementById("guess3").children,
+    document.getElementById("guess4").children,
+    document.getElementById("guess5").children,
+    document.getElementById("guess6").children,
+]
 
 // clear boxes on site load
 document.addEventListener("load", reset, false);
 function reset() {
-    for (i of boxes1) { i.value = ""; }
-    for (i of boxes2) { i.value = ""; }
-    for (i of boxes3) { i.value = ""; }
-    for (i of boxes4) { i.value = ""; }
-    for (i of boxes5) { i.value = ""; }
-    for (i of boxes6) { i.value = ""; }
+    for (i of boxes[1 - 1]) { i.value = ""; }
+    for (i of boxes[2 - 1]) { i.value = ""; }
+    for (i of boxes[3 - 1]) { i.value = ""; }
+    for (i of boxes[4 - 1]) { i.value = ""; }
+    for (i of boxes[5 - 1]) { i.value = ""; }
+    for (i of boxes[6 - 1]) { i.value = ""; }
 }
 
 // activate guesses
 function setSelectables() {
     if (guess === 1) {
-        for (let i of boxes1) { i.disabled = false; }
-        for (let i of boxes2) { i.disabled = true; }
-        for (let i of boxes3) { i.disabled = true; }
-        for (let i of boxes4) { i.disabled = true; }
-        for (let i of boxes5) { i.disabled = true; }
-        for (let i of boxes6) { i.disabled = true; }
+        for (let i of boxes[1 - 1]) { i.disabled = false; }
+        for (let i of boxes[2 - 1]) { i.disabled = true; }
+        for (let i of boxes[3 - 1]) { i.disabled = true; }
+        for (let i of boxes[4 - 1]) { i.disabled = true; }
+        for (let i of boxes[5 - 1]) { i.disabled = true; }
+        for (let i of boxes[6 - 1]) { i.disabled = true; }
     }
 
     if (guess === 2) {
-        for (let i of boxes2) { i.disabled = false; }
-        for (let i of boxes1) { i.disabled = true; }
-        for (let i of boxes3) { i.disabled = true; }
-        for (let i of boxes4) { i.disabled = true; }
-        for (let i of boxes5) { i.disabled = true; }
-        for (let i of boxes6) { i.disabled = true; }
+        for (let i of boxes[2 - 1]) { i.disabled = false; }
+        for (let i of boxes[1 - 1]) { i.disabled = true; }
+        for (let i of boxes[3 - 1]) { i.disabled = true; }
+        for (let i of boxes[4 - 1]) { i.disabled = true; }
+        for (let i of boxes[5 - 1]) { i.disabled = true; }
+        for (let i of boxes[6 - 1]) { i.disabled = true; }
     }
 
     if (guess === 3) {
-        for (let i of boxes3) { i.disabled = false; }
-        for (let i of boxes2) { i.disabled = true; }
-        for (let i of boxes1) { i.disabled = true; }
-        for (let i of boxes4) { i.disabled = true; }
-        for (let i of boxes5) { i.disabled = true; }
-        for (let i of boxes6) { i.disabled = true; }
+        for (let i of boxes[3 - 1]) { i.disabled = false; }
+        for (let i of boxes[2 - 1]) { i.disabled = true; }
+        for (let i of boxes[1 - 1]) { i.disabled = true; }
+        for (let i of boxes[4 - 1]) { i.disabled = true; }
+        for (let i of boxes[5 - 1]) { i.disabled = true; }
+        for (let i of boxes[6 - 1]) { i.disabled = true; }
     }
 
     if (guess === 4) {
-        for (let i of boxes4) { i.disabled = false; }
-        for (let i of boxes2) { i.disabled = true; }
-        for (let i of boxes3) { i.disabled = true; }
-        for (let i of boxes1) { i.disabled = true; }
-        for (let i of boxes5) { i.disabled = true; }
-        for (let i of boxes6) { i.disabled = true; }
+        for (let i of boxes[4 - 1]) { i.disabled = false; }
+        for (let i of boxes[2 - 1]) { i.disabled = true; }
+        for (let i of boxes[3 - 1]) { i.disabled = true; }
+        for (let i of boxes[1 - 1]) { i.disabled = true; }
+        for (let i of boxes[5 - 1]) { i.disabled = true; }
+        for (let i of boxes[6 - 1]) { i.disabled = true; }
     }
 
     if (guess === 5) {
-        for (let i of boxes5) { i.disabled = false; }
-        for (let i of boxes2) { i.disabled = true; }
-        for (let i of boxes3) { i.disabled = true; }
-        for (let i of boxes4) { i.disabled = true; }
-        for (let i of boxes1) { i.disabled = true; }
-        for (let i of boxes6) { i.disabled = true; }
+        for (let i of boxes[5 - 1]) { i.disabled = false; }
+        for (let i of boxes[2 - 1]) { i.disabled = true; }
+        for (let i of boxes[3 - 1]) { i.disabled = true; }
+        for (let i of boxes[4 - 1]) { i.disabled = true; }
+        for (let i of boxes[1 - 1]) { i.disabled = true; }
+        for (let i of boxes[6 - 1]) { i.disabled = true; }
     }
 
     if (guess === 6) {
-        for (let i of boxes6) { i.disabled = false; }
-        for (let i of boxes2) { i.disabled = true; }
-        for (let i of boxes3) { i.disabled = true; }
-        for (let i of boxes4) { i.disabled = true; }
-        for (let i of boxes5) { i.disabled = true; }
-        for (let i of boxes1) { i.disabled = true; }
+        for (let i of boxes[6 - 1]) { i.disabled = false; }
+        for (let i of boxes[2 - 1]) { i.disabled = true; }
+        for (let i of boxes[3 - 1]) { i.disabled = true; }
+        for (let i of boxes[4 - 1]) { i.disabled = true; }
+        for (let i of boxes[5 - 1]) { i.disabled = true; }
+        for (let i of boxes[1 - 1]) { i.disabled = true; }
     }
 
-    if (guess === 7) {
-        for (let i of boxes6) { i.disabled = true; }
-        for (let i of boxes2) { i.disabled = true; }
-        for (let i of boxes3) { i.disabled = true; }
-        for (let i of boxes4) { i.disabled = true; }
-        for (let i of boxes5) { i.disabled = true; }
-        for (let i of boxes1) { i.disabled = true; }
+    if (guess >= 7) {
+        for (let i of boxes[6 - 1]) { i.disabled = true; }
+        for (let i of boxes[2 - 1]) { i.disabled = true; }
+        for (let i of boxes[3 - 1]) { i.disabled = true; }
+        for (let i of boxes[4 - 1]) { i.disabled = true; }
+        for (let i of boxes[5 - 1]) { i.disabled = true; }
+        for (let i of boxes[1 - 1]) { i.disabled = true; }
     }
 }
 
@@ -134,7 +137,7 @@ document.addEventListener("keydown", submit, false);
 function submit(e) {
     if (e.keyCode === 13) { // enter key
         if (guess === 1) {
-            for (let i of boxes1) {
+            for (let i of boxes[1 - 1]) {
                 if (!(i.value === "")) {
                     passes += 1;
                     userWordArray.push(i.value);
@@ -142,7 +145,7 @@ function submit(e) {
             }
         }
         if (guess === 2) {
-            for (let i of boxes2) {
+            for (let i of boxes[2 - 1]) {
                 if (!(i.value === "")) {
                     passes += 1;
                     userWordArray.push(i.value);
@@ -150,7 +153,7 @@ function submit(e) {
             }
         }
         if (guess === 3) {
-            for (let i of boxes3) {
+            for (let i of boxes[3 - 1]) {
                 if (!(i.value === "")) {
                     passes += 1;
                     userWordArray.push(i.value);
@@ -158,7 +161,7 @@ function submit(e) {
             }
         }
         if (guess === 4) {
-            for (let i of boxes4) {
+            for (let i of boxes[4 - 1]) {
                 if (!(i.value === "")) {
                     passes += 1;
                     userWordArray.push(i.value);
@@ -166,7 +169,7 @@ function submit(e) {
             }
         }
         if (guess === 5) {
-            for (let i of boxes5) {
+            for (let i of boxes[5 - 1]) {
                 if (!(i.value === "")) {
                     passes += 1;
                     userWordArray.push(i.value);
@@ -174,7 +177,7 @@ function submit(e) {
             }
         }
         if (guess === 6) {
-            for (let i of boxes6) {
+            for (let i of boxes[6 - 1]) {
                 if (!(i.value === "")) {
                     passes += 1;
                     userWordArray.push(i.value);
@@ -189,6 +192,64 @@ function submit(e) {
             guess += 1;
             setSelectables();
         }
+    }
+
+    console.log(userWord);
+    matchToGoal();
+}
+
+function matchToGoal() {
+    let guessWord = userWord.split("");
+    let goalCopy = [...goal];
+
+    let result = ["grey", "grey", "grey", "grey", "grey"];
+
+    // exact match
+    for (let i = 0; i < 5; i++) {
+        if (guessWord[i] === goalCopy[i]) {
+            result[i] = "green";
+
+            // remove matched
+            goalCopy[i] = null;
+            guessWord[i] = null;
+        }
+    }
+
+    // wrong position but exists
+    for (let i = 0; i < 5; i++) {
+        if (guessWord[i] !== null) {
+            let foundIndex = goalCopy.indexOf(guessWord[i]);
+
+            if (foundIndex !== -1) {
+
+                result[i] = "yellow";
+
+                // remove a copy
+                goalCopy[foundIndex] = null;
+            }
+        }
+    }
+
+    // colour
+    for (let i = 0; i < 5; i++) {
+        if (result[i] === "green") {
+            boxes[guess - 2][i].style.background = "#f7ccff"; // pinck
+        }
+
+        else if (result[i] === "yellow") {
+            boxes[guess - 2][i].style.background = "#d6c052"; // yeller
+        }
+
+        else {
+            boxes[guess - 2][i].style.background = "#eee"; // black
+        }
+    }
+
+    // finish!
+    console.log(result);
+    if (!result.includes("grey") && !result.includes("grey")) {
+        guess = 10;
+        setSelectables();
     }
 }
 
