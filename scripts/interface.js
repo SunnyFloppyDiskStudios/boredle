@@ -25,14 +25,8 @@ function setSelectables() {
     const reference = guess - 1;
 
     for (let i = 0; i < 6; i++) { // for boxes
-        if (i === reference) {
-            for (let j of boxes[i]) {
-                j.disabled = false;
-            }
-        } else {
-            for (let j of boxes[i]) {
-                j.disabled = true;
-            }
+        for (let j of boxes[i]) { // for inputs
+            j.disabled = i !== reference;
         }
     }
 }
