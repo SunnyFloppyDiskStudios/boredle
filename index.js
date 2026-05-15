@@ -237,7 +237,7 @@ function matchToGoal() {
         }
 
         else if (result[i] === "yellow") {
-            boxes[guess - 2][i].style.background = "#d6c052"; // yeller
+            boxes[guess - 2][i].style.background = "#52c7d6"; // bleu
         }
 
         else {
