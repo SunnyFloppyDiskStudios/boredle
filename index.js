@@ -250,6 +250,22 @@ function matchToGoal() {
     if (!result.includes("grey") && !result.includes("grey")) {
         guess = 10;
         setSelectables();
+        celebrate();
+    } else if (guess === 7) {
+        kill();
+    }
+}
+
+function celebrate() {
+    for (var i in document.children) {
+        document["children"][i].style.background = "#52d65e"
+    }
+}
+
+
+function kill() {
+    for (var i in document.children) {
+        document["children"][i].style.background = "#cb2a2a"
     }
 }
 
