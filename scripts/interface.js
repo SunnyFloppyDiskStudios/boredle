@@ -1,5 +1,7 @@
 // script for the ui
 
+const filler = "+";
+
 let guess = 1;
 
 // all guess boxes on the page
@@ -97,26 +99,66 @@ function submit(e) {
         }
 
         passes = 0;
-    }
 
-    matchToGoal();
+        matchToGoal();
+    }
 }
 
 function matchToGoal() {
-    // for (let i = 0; i < 5; i++) {
-    //     if (result[i] === "green") {
-    //         boxes[guess - 2][i].style.background = "#f7ccff"; // pinck (aka greeen)
-    //     } else if (result[i] === "yellow") {
-    //         boxes[guess - 2][i].style.background = "#52c7d6"; // bleu (aka yellow)
-    //     } else {
-    //         boxes[guess - 2][i].style.background = "#999"; // grey (aka gray)
-    //     }
-    // }
+    let matches = [3,3,3,3,3]; // 1 = match, 2 = there, 3 = womp
+
+    let goalArray = [];
+    for (let i of goal) {
+        goalArray.push(i);
+    }
+
+    let guessArray = [];
+    for (let i of userWord) {
+        guessArray.push(i);
+    }
+
+    // perfect match
+    for (let i in goalArray) {
+        if (goalArray[i] === guessArray[i]) {
+            matches[i] = 1;
+            goalArray[i] = filler;
+            guessArray[i] = filler;
+        }
+    }
+
+    // exists in match
+    for (let i in goalArray) {
+        if (guessArray.includes(goalArray[i]) && guessArray[i] !== filler) {
+            matches[i] = 2;
+            goalArray[i] = filler;
+        }
+    }
+
+    console.log(matches);
+
+    for (let i in matches) {
+        if (matches[i] === 1) {
+            boxes[guess - 2][i].style.background = "#f7ccff"; // pinck (aka greeen)
+        } else if (matches[i] === 2) {
+            boxes[guess - 2][i].style.background = "#52c7d6"; // bleu (aka yellow)
+        } else {
+            boxes[guess - 2][i].style.background = "#999"; // grey (aka gray)
+        }
+    }
+
+    if (!matches.includes(2) && !matches.includes(3)) {
+        guess = 10;
+        setSelectables();
+        celebrate(true);
+    } else if (guess > 6) {
+        guess = 50;
+        celebrate(false);
+    }
 }
 
-function celebrate(isCelebrating) {
+function celebrate(doo) {
     for (let i in document.children) {
-        if (isCelebrating) {
+        if (doo) {
             document["children"][i].style.background = "#52d65e"
         } else {
             document["children"][i].style.background = "#cb2a2a"
