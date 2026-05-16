@@ -68,15 +68,20 @@
         </div>
     </div>
     <div class="options">
-        <input type="checkbox" id="classic">
-        <label for="classic">Classic Colours</label><br>
-        <input type="checkbox" id="hard" disabled>
-        <label for="hard">Hard Mode</label><br>
+        <button id="helpButton">how to play...?</button>
         <a href="https://sunnyflops.net"><h2>< sunnyflops.net</h2></a>
     </div>
+
+    <div id="helpMenu">
+        <h3>type letters into the boxes and form words in the famous boredlang language. If you are not familiar with boredlang, it's gibberish. The word to guess is generated every time you reload the page.</h3>
+        <h3 style="color: #f7ccff">if the box is this colour then you got the letter correct and in the right place</h3>
+        <h3 style="color: #527cd6">if the box is this colour then you got the letter correct but it's in a different place</h3>
+        <h3>if the box is not like that then you got the letter wrong</h3>
+
+        <button id="dismissHelp">ok i think i got it now</button>
+    </div>
+
 </div>
-
-
 </body>
 <script src="scripts/interface.js"></script>
 <script src="scripts/options.js"></script>

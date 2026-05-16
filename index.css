@@ -45,6 +45,8 @@ html, body {
     paint-order: stroke fill;
 
     align-content: center;
+
+    overflow: hidden;
 }
 
 .tiling::after {
@@ -113,9 +115,29 @@ a {
     width: 300px;
     align-content: center;
     font-family: comical, sans-serif;
-    -webkit-text-stroke: 0px white;
+    -webkit-text-stroke: 0 white;
     position: absolute;
 
     bottom: 20px;
     left: 20px;
+}
+
+#helpMenu {
+    -webkit-text-stroke: 3px white;
+    width: 80%;
+    height: 80%;
+    position: absolute;
+    z-index: 100;
+    background-color: #00000022;
+
+    backdrop-filter: blur(10px);
+
+    align-items: center;
+    justify-content: center;
+
+    flex-direction: column;
+
+    display: none;
+
+    padding: 20px;
 }

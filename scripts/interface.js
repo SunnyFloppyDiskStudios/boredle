@@ -128,19 +128,19 @@ function matchToGoal() {
 
     // exists in match
     for (let i in goalArray) {
-        if (guessArray.includes(goalArray[i]) && guessArray[i] !== filler) {
+        if (goalArray.includes(guessArray[i]) && guessArray[i] !== filler) {
             matches[i] = 2;
-            goalArray[i] = filler;
+
+            goalArray[goalArray.indexOf(guessArray[i])] = filler;
+            guessArray[i] = filler;
         }
     }
-
-    console.log(matches);
 
     for (let i in matches) {
         if (matches[i] === 1) {
             boxes[guess - 2][i].style.background = "#f7ccff"; // pinck (aka greeen)
         } else if (matches[i] === 2) {
-            boxes[guess - 2][i].style.background = "#52c7d6"; // bleu (aka yellow)
+            boxes[guess - 2][i].style.background = "#527cd6"; // bleu (aka yellow)
         } else {
             boxes[guess - 2][i].style.background = "#999"; // grey (aka gray)
         }
