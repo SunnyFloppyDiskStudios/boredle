@@ -1,4 +1,17 @@
-// script for the ui
+// script for the game
+
+const words = [
+    "BORED","BORAD","BORID","BOROD","BORUD",
+    "BARED","BARAD","BARID","BAROD","BARUD",
+    "BERED","BERAD","BERID","BEROD","BERUD",
+    "BIRED","BIRAD","BIRID","BIROD","BIRUD",
+    "BURED","BURAD","BURID","BUROD","BURUD",
+    "BOERD","BODER","OBRED","BROED","BOEDR",
+    "BORDE","BEORD","BEARD","BOREM","BORES",
+    "BOREF","BRODE","BAERD","BRAID","BRIAD",
+    "MEOWM","BMEOW","BAAAH","BWAHA","HELPM",
+    "BAHHH","BAAHH","BWAAH","AAAAA","BBBBB",
+];
 
 const filler = "+";
 
@@ -169,5 +182,9 @@ function celebrate(doo) {
 let goal = "BORED"; // test value for now
 
 function wordOfTheDay() {
+    goal = words[Math.floor(Math.random() * words.length)];
 
 }
+
+wordOfTheDay();
+console.log(goal);

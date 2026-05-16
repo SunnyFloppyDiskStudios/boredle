@@ -124,8 +124,8 @@ a {
 
 #helpMenu {
     -webkit-text-stroke: 3px white;
-    width: 80%;
-    height: 80%;
+    width: calc(100% - 100px);
+    height: calc(100% - 100px);
     position: absolute;
     z-index: 100;
     background-color: #00000022;
