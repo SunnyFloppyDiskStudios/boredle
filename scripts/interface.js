@@ -11,7 +11,7 @@ const words = [
     "BOREF","BRODE","BAERD","BRAID","BRIAD",
     "MEOWM","BMEOW","BAAAH","BWAHA","HELPM",
     "BAHHH","BAAHH","BWAAH","AAAAA","BBBBB",
-    "BREAD",
+    "BREAD","BOURD"
 ];
 
 const filler = "+";
